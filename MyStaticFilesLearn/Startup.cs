@@ -24,7 +24,11 @@ namespace MyStaticFilesLearn
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             //app.UseDirectoryBrowser();
-            app.UseFileServer();
+            app.UseFileServer(new FileServerOptions
+            {
+                EnableDirectoryBrowsing = true, 
+                FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), @"wwwroot\html")), RequestPath = new PathString("/pages"), EnableDefaultFiles=false
+            });
             //app.UseStaticFiles();
             //app.UseStaticFiles(new StaticFileOptions()
             //{
